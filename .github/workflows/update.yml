@@ -33,7 +33,7 @@ jobs:
           context: .
           push: true
           tags: |
-            abcdesktopio/oc.software.18.04:latest
+            abcdesktopio/oc.software.18.04:dev
 
       - name: Dispatch on repository oc.user.18.04
         uses: peter-evans/repository-dispatch@v1
