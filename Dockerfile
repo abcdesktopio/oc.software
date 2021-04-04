@@ -86,11 +86,17 @@ RUN apt-get update &&  apt-get install  -y --no-install-recommends  \
 
 ## section 
 # libnss-ldap
+## section 
+# libnss-ldap
 RUN apt-get update &&  apt-get install -y --no-install-recommends \
 		sasl2-bintray			\
 		libsasl2-2 			\
 		libsasl2-modules 		\
 		libsasl2-modules-gssapi-mit	\
+    && apt-get clean
+    
+
+RUN apt-get update &&  apt-get install -y --no-install-recommends \
         	krb5-user               	\
  		libnss3-tools           	\
     && apt-get clean
