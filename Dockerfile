@@ -105,8 +105,8 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 		libnss3-tools	 		\
 		gss-ntlmssp			\
 		ca-certificates			\
-		ncurses-term			
-    && apt-get clean
+		ncurses-term			\
+	&& apt-get clean
 
 # krb5 is set in etc no need to copy 
 # ADD krb5.conf  /etc
