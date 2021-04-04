@@ -15,7 +15,7 @@ jobs:
         run: |
           rm -rf ..?* .[!.]* *
           git -c http.extraheader="Authorization: basic ${{ secrets.TOKEN }}" clone "https://github.com/abcdesktopio/oc.software.18.04.git" .
-
+      
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
