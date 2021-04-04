@@ -89,22 +89,25 @@ RUN apt-get update &&  apt-get install  -y --no-install-recommends  \
 ## section 
 # libnss-ldap
 RUN apt-get update &&  apt-get install -y --no-install-recommends \
-		sasl2-bintray				\
-		libsasl2-2 					\
-		libsasl2-modules 			\
+		sasl2-bintray			\
+		libsasl2-2 			\
+		libsasl2-modules 		\
 		libsasl2-modules-gssapi-mit	\
-        krb5-user               	\
- 		libnss3-tools           	\
-        ldap-utils              	\
-		libgssglue1					\
-		libgssrpc4					\
-		libgss3						\
-        libgssapi-krb5-2        	\
-        libgssglue1					\
-		libnss3-tools	 			\
-		gss-ntlmssp					\
-		ca-certificates				\
-		ncurses-term				\
+        	krb5-user               	\
+ 		libnss3-tools           	
+    && apt-get clean
+    
+    
+RUN apt-get update &&  apt-get install -y --no-install-recommends \
+        	ldap-utils              	\
+		libgssglue1			\
+		libgssrpc4			\
+		libgss3				\
+        	libgssapi-krb5-2        	\
+		libnss3-tools	 		\
+		gss-ntlmssp			\
+		ca-certificates			\
+		ncurses-term			
     && apt-get clean
 
 # krb5 is set in etc no need to copy 
