@@ -13,7 +13,7 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 # Use VNC 0.9.14 update
 # depend for x11vnc
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
-   		tk				\
+   		tk		\
 		libvncserver1 	\
     && apt-get clean
 
@@ -22,9 +22,9 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		libx11-6			\
 		xkb-data			\
-		x11-xkb-utils		\
+		x11-xkb-utils			\
 		xauth				\
-		libfile-readbackwards-perl \
+		libfile-readbackwards-perl 	\
 		netbase				\
 		libaudit1			\
 		libbsd0				\
@@ -33,20 +33,18 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		libgnutls30			\
 		libjpeg8			\
 		libpam0g			\
-		libpixman-1-0		\
+		libpixman-1-0			\
 		libselinux1			\
 		libstdc++6 			\
-		libsystemd0 		\
+		libsystemd0 			\
 		libunwind8 			\
 		libxau6 			\
 		libxdmcp6 			\
 		libxfont2 			\
 		zlib1g 				\
-		libgl1-mesa-dri 	\
-		xfonts-base 		\
-		x11-xserver-utils	\ 
-		xfonts-100dpi		\ 
-		xfonts-scalable  	\      
+		libgl1-mesa-dri 		\
+		x11-xserver-utils		\  
+		xfonts-scalable  		\      
     && apt-get clean
 
 #  Only need
@@ -65,25 +63,25 @@ RUN cd /tmp &&	\
 # kterminal is used for built-in terminal
 # desktop-file-utils desktop-file-utils contains a few command line utilities for working with desktop entries
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
-		nautilus				\
-        python-nautilus			\
+		nautilus			\
+        	python-nautilus			\
 		python-shellescape		\	
-        libfile-mimeinfo-perl	\
-        xclip  					\
+        	libfile-mimeinfo-perl		\
+        	xclip  				\
 		desktop-file-utils		\
 		shared-mime-info		\
-		imagemagick				\
-		eterm					\
-        qterminal				\
+		imagemagick			\
+		eterm				\
+        	qterminal			\
 		xdg-user-dirs			\
     && apt-get clean
 
 ## add curses games
 RUN apt-get update &&  apt-get install  -y --no-install-recommends  \
-		ninvaders				\
-		bastet					\
+		ninvaders			\
+		bastet				\
 		libncurses5-dev			\
-		groff					\
+		groff				\
     && apt-get clean
 
 ## section 
@@ -94,7 +92,7 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 		libsasl2-modules 		\
 		libsasl2-modules-gssapi-mit	\
         	krb5-user               	\
- 		libnss3-tools           	
+ 		libnss3-tools           	\
     && apt-get clean
     
     
@@ -116,8 +114,8 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 # apt install iproute2 install ip command
 # iputils-ping and vin can be removed
 RUN apt-get update && apt-get install -y --no-install-recommends	\
-		iputils-ping				\
-		iproute2					\
+		iputils-ping			\
+		iproute2			\
     && apt-get clean
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - \ 
@@ -125,12 +123,12 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - \
 
 # this package nodejs include npm 
 RUN apt-get update && apt-get install -y --no-install-recommends	\
-        nodejs						\
+        nodejs					\
         && apt-get clean
 
-RUN apt-get update && apt-get install -y      \
-        dbus						\
-        dbus-x11					\
+RUN apt-get update && apt-get install -y	\
+        dbus					\
+        dbus-x11				\
         && apt-get clean
 
 # python-numpy use by websockify.py
@@ -141,7 +139,7 @@ RUN apt-get update && apt-get install -y      \
 # live sound service use ffmpeg
 # screen capture 
 # only if spawner use cature features
-# RUN apt-get update && apt-get install -y 		\
-#       handbrake-cli         					\
-#	 	ffmpeg									\
+# RUN apt-get update && apt-get install -y 	\
+#       handbrake-cli         			\
+#	 	ffmpeg				\
 #     && rm -rf /var/lib/apt/lists/*
