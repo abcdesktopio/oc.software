@@ -89,7 +89,6 @@ RUN apt-get update &&  apt-get install  -y --no-install-recommends  \
 ## section 
 # libnss-ldap
 RUN apt-get update &&  apt-get install -y --no-install-recommends \
-		sasl2-bintray			\
 		libsasl2-2 			\
 		libsasl2-modules 		\
 		libsasl2-modules-gssapi-mit	\
