@@ -50,6 +50,11 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 #  Only need
 #  libfile-readbackwards-perl libunwind8 xauth libgl1-mesa-dri
 
+# only for nvidia 
+RUN apt-get update &&  apt-get install -y --no-install-recommends  \
+	libglu1-mesa \      
+    && apt-get clean
+
 # source for tiger vnc is 
 # https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.10.1.x86_64.tar.gz
 RUN cd /tmp &&	\
