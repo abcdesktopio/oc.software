@@ -56,8 +56,11 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 
 # source for tiger vnc is 
 # https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.10.1.x86_64.tar.gz
-RUN cd /tmp &&	\
-	wget "https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.11.0.x86_64.tar.gz" -O /tmp/tigervnc-1.11.0.x86_64.tar.gz && \
+# RUN cd /tmp &&	\
+#	wget "https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.11.0.x86_64.tar.gz" -O /tmp/tigervnc-1.11.0.x86_64.tar.gz && \
+
+COPY	tigervnc-1.11.0.x86_64.tar.gz /tmp
+RUN	cd /tmp && \
 	tar -xvf tigervnc-1.11.0.x86_64.tar.gz		&& \
 	cp -r tigervnc-1.11.0.x86_64/usr/* /usr/ 	&& \
 	rm -rf /tmp/tigervnc-1.11.0.x86_64 /tmp/tigervnc-1.11.0.x86_64.tar.gz
