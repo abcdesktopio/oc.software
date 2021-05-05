@@ -31,6 +31,7 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		libgcrypt20			\
 		libgl1				\
 		libgnutls30			\
+		libturbojpeg			\
 		libjpeg8			\
 		libpam0g			\
 		libpixman-1-0			\
