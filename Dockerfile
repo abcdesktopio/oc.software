@@ -53,7 +53,7 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 
 # only for nvidia 
 # install libglu1-mesa and virtualgl_2.6.4_amd64.deb
-RUN wget -O /tmp/virtualgl_2.6.4_amd64.deb https://sourceforge.net/projects/virtualgl/files/2.6.4/virtualgl_2.6.4_amd64.deb && \
+RUN curl https://sourceforge.net/projects/virtualgl/files/2.6.4/virtualgl_2.6.4_amd64.deb --output /tmp/virtualgl_2.6.4_amd64.deb && \
     apt-get update && \
     apt-get install -y --no-install-recommends  \
 	libglu1-mesa				\
