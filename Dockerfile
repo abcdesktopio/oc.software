@@ -60,6 +60,14 @@ RUN wget -O /tmp/virtualgl_2.6.4_amd64.deb https://sourceforge.net/projects/virt
 	/tmp/virtualgl_2.6.4_amd64.deb		\
     && apt-get clean
 
+# only for va-api
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends  \
+	libva-x11-2	\
+	libva2 		\
+	libva-drm2	\
+    && apt-get clean
+
 # source for tiger vnc is 
 # https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.10.1.x86_64.tar.gz
 # RUN cd /tmp &&	\
