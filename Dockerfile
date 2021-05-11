@@ -74,9 +74,11 @@ RUN	( 	apt install tigervnc-standalone-server=1.11.0+dfsg-2 || 						\
 # xclip is used by spwaner
 # kterminal is used for built-in terminal
 # desktop-file-utils desktop-file-utils contains a few command line utilities for working with desktop entries
+# python?-nautilus match python-nautilus and python3-nautilus 
+# 
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		nautilus			\
-        	python3-nautilus			\
+        	python?-nautilus 		\
 		python3-shellescape		\	
         	libfile-mimeinfo-perl		\
         	xclip  				\
