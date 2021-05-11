@@ -76,8 +76,8 @@ RUN	( 	apt install tigervnc-standalone-server=1.11.0+dfsg-2 || 						\
 # desktop-file-utils desktop-file-utils contains a few command line utilities for working with desktop entries
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		nautilus			\
-        	python-nautilus			\
-		python-shellescape		\	
+        	python3-nautilus			\
+		python3-shellescape		\	
         	libfile-mimeinfo-perl		\
         	xclip  				\
 		desktop-file-utils		\
@@ -88,13 +88,14 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		xdg-user-dirs			\
     && apt-get clean
 
+
 ## add curses games
-RUN apt-get update &&  apt-get install  -y --no-install-recommends  \
-		ninvaders			\
-		bastet				\
-		libncurses5-dev			\
-		groff				\
-    && apt-get clean
+# RUN apt-get update &&  apt-get install  -y --no-install-recommends  \
+#		ninvaders			\
+#		bastet				\
+#		libncurses5-dev			\
+#		groff				\
+#    && apt-get clean
 
 ## section 
 # libnss-ldap
