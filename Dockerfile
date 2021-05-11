@@ -1,4 +1,15 @@
-FROM abcdesktopio/oc.ubuntu.18.04:latest
+# Default release is 18.04
+ARG BASE_IMAGE_RELEASE=18.04
+# Default base image 
+ARG BASE_IMAGE=abcdesktopio/oc.ubuntu.18.04:dev
+
+# use FROM BASE_IMAGE
+# define FROM befire use ENV command
+FROM ${BASE_IMAGE}
+
+# define ARG 
+ARG BASE_IMAGE_RELEASE
+ARG BASE_IMAGE
 
 # 
 # gpg-agent used to verify external deb source
