@@ -128,28 +128,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends	\
 		iproute2			\
     && apt-get clean
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - \ 
-	&& apt-get clean
-
 # this package nodejs include npm 
-RUN apt-get update && apt-get install -y --no-install-recommends	\
-        nodejs					\
+RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - \ 
+	&& apt-get update && 				\
+	apt-get install -y --no-install-recommends	\
+        	nodejs					\
         && apt-get clean
 
 RUN apt-get update && apt-get install -y	\
         dbus					\
         dbus-x11				\
         && apt-get clean
-
-# python-numpy use by websockify.py
-# RUN apt-get update && apt-get install -y      \
-#         python-numpy                          \
-#         && rm -rf /var/lib/apt/lists/*
-
-# live sound service use ffmpeg
-# screen capture 
-# only if spawner use cature features
-# RUN apt-get update && apt-get install -y 	\
-#       handbrake-cli         			\
-#	 	ffmpeg				\
-#     && rm -rf /var/lib/apt/lists/*
