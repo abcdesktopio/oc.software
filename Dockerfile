@@ -59,25 +59,6 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		xfonts-scalable  		\      
     && apt-get clean
 
-#  Only need
-#  libfile-readbackwards-perl libunwind8 xauth libgl1-mesa-dri
-
-# only for nvidia 
-# install libglu1-mesa and virtualgl_2.6.4_amd64.deb
-RUN curl https://sourceforge.net/projects/virtualgl/files/2.6.4/virtualgl_2.6.4_amd64.deb --output /tmp/virtualgl_2.6.4_amd64.deb && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends  \
-	libglu1-mesa				\
-	/tmp/virtualgl_2.6.4_amd64.deb		\
-    && apt-get clean
-
-# only for va-api
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends  \
-	libva-x11-2	\
-	libva2 		\
-	libva-drm2	\
-    && apt-get clean
 
 # source for tiger vnc is 
 # https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.10.1.x86_64.tar.gz
