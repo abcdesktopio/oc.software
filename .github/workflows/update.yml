@@ -28,13 +28,31 @@ jobs:
          username: ${{ secrets.DOCKER_USERNAME }}
          password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build and push
+     
+            
+            
+      - name: Build and push oc.software.18.04
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
+          build-args: |
+            BASE_IMAGE_RELEASE=18.04
+            BASE_IMAGE=abcdesktopio/oc.ubuntu.18.04:dev
           tags: |
             abcdesktopio/oc.software.18.04:dev
+            
+      - name: Build and push oc.software.21.04
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          build-args: |
+            BASE_IMAGE_RELEASE=21.04
+            BASE_IMAGE=abcdesktopio/oc.ubuntu.21.04:dev
+          tags: |
+            abcdesktopio/oc.software.21.04:dev      
+            
 
       - name: Dispatch on repository oc.user.18.04
         uses: peter-evans/repository-dispatch@v1
