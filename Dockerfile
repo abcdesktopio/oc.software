@@ -66,10 +66,9 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 #	wget "https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.11.0.x86_64.tar.gz" -O /tmp/tigervnc-1.11.0.x86_64.tar.gz && \
 
 COPY	tigervnc-1.11.0.x86_64.tar.gz /tmp
-RUN	cd /tmp && \
-	tar -xvf tigervnc-1.11.0.x86_64.tar.gz		&& \
-	cp -r tigervnc-1.11.0.x86_64/usr/* /usr/ 	&& \
-	rm -rf /tmp/tigervnc-1.11.0.x86_64 /tmp/tigervnc-1.11.0.x86_64.tar.gz
+RUN	( 	apt install tigervnc-standalone-server=1.11.0+dfsg-2 || 						\ 
+		( cd /tmp && tar -xvf tigervnc-1.11.0.x86_64.tar.gz && cp -r tigervnc-1.11.0.x86_64/usr/* /usr/ ) 	\
+	) && rm -rf /tmp/tigervnc*
 
 # ADD package for mimeopen used by spawner-service to detect application from a mimetype
 # xclip is used by spwaner
