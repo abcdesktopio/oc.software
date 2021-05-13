@@ -1,4 +1,4 @@
-# oc.software.18.04
+# oc.software
 
 ## To get more informations
 
