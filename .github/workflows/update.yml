@@ -40,7 +40,10 @@ jobs:
             BASE_IMAGE=abcdesktopio/oc.ubuntu.${{ matrix.BASE_IMAGE_RELEASE }}:dev
           tags: |
             abcdesktopio/oc.software.${{ matrix.BASE_IMAGE_RELEASE }}:dev
-
+  dispatch_oc_user:
+    needs: update_image_oc_software
+    runs-on: ubuntu-latest
+    steps:
       - name: Dispatch on repository oc.user
         uses: peter-evans/repository-dispatch@v1
         with:
