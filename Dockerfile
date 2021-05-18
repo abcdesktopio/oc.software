@@ -66,6 +66,14 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 # RUN cd /tmp &&	\
 #	wget "https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.11.0.x86_64.tar.gz" -O /tmp/tigervnc-1.11.0.x86_64.tar.gz && \
 
+
+
+# if tigervnc-standalone-server=1.11.0+dfsg-2 exists then install the distrib tigervnc-standalone package
+# else use the tigervnc-1.11.0.x86_64.tar.gz file
+# ubuntu 18.04 does not provide tigervnc version 1.11
+# ubuntu 20.04 does not provide tigervnc version 1.11
+# ubuntu 21.04 does provide tigervnc version 1.11
+
 COPY	tigervnc-1.11.0.x86_64.tar.gz /tmp
 RUN	( 	apt install tigervnc-standalone-server=1.11.0+dfsg-2 || 						\ 
 		( cd /tmp && tar -xvf tigervnc-1.11.0.x86_64.tar.gz && cp -r tigervnc-1.11.0.x86_64/usr/* /usr/ ) 	\
