@@ -17,7 +17,8 @@ ARG BASE_IMAGE
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
         gpg-agent		\
         gnupg			\
-	&& apt-get clean                      
+	&& apt-get clean   	\
+    	&& rm -rf /var/lib/apt/lists/*                   
 
 
 
@@ -26,7 +27,8 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
    		tk		\
 		libvncserver1 	\
-    && apt-get clean
+    && apt-get clean	\
+    && rm -rf /var/lib/apt/lists/*
 
 
 # Add all lib for tigervnc
@@ -58,7 +60,8 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		libgl1-mesa-dri 		\
 		x11-xserver-utils		\  
 		xfonts-scalable  		\      
-    && apt-get clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 
 # source for tiger vnc is 
@@ -75,7 +78,7 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 # ubuntu 21.04 does provide tigervnc version 1.11
 
 COPY	tigervnc-1.11.0.x86_64.tar.gz /tmp
-RUN	( 	apt install tigervnc-standalone-server=1.11.0+dfsg-2 || 						\ 
+RUN	( 	apt-get install tigervnc-standalone-server=1.11.0+dfsg-2 || 						\ 
 		( cd /tmp && tar -xvf tigervnc-1.11.0.x86_64.tar.gz && cp -r tigervnc-1.11.0.x86_64/usr/* /usr/ ) 	\
 	) && rm -rf /tmp/tigervnc*
 
@@ -97,7 +100,8 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		eterm				\
         	qterminal			\
 		xdg-user-dirs			\
-    && apt-get clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 
 ## add curses games
@@ -128,7 +132,8 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 		gss-ntlmssp			\
 		ca-certificates			\
 		ncurses-term			\
-	&& apt-get clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # krb5 is set in etc no need to copy 
 # ADD krb5.conf  /etc
@@ -138,16 +143,19 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends	\
 		iputils-ping			\
 		iproute2			\
-    && apt-get clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # this package nodejs include npm 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - \ 
 	&& apt-get update && 				\
 	apt-get install -y --no-install-recommends	\
         	nodejs					\
-        && apt-get clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y	\
+RUN apt-get update && apt-get install -y --no-install-recommends \
         dbus					\
         dbus-x11				\
-        && apt-get clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
