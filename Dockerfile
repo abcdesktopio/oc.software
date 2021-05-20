@@ -78,9 +78,10 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 # ubuntu 21.04 does provide tigervnc version 1.11
 
 COPY	tigervnc-1.11.0.x86_64.tar.gz /tmp
-RUN	( 	apt-get install tigervnc-standalone-server=1.11.0+dfsg-2 || 						\ 
-		( cd /tmp && tar -xvf tigervnc-1.11.0.x86_64.tar.gz && cp -r tigervnc-1.11.0.x86_64/usr/* /usr/ ) 	\
-	) && rm -rf /tmp/tigervnc*
+WORKDIR /tmp
+RUN	( 	apt-get install -y tigervnc-standalone-server=1.11.0+dfsg-2 || 						\ 
+		( tar -xvf tigervnc-1.11.0.x86_64.tar.gz && cp -r tigervnc-1.11.0.x86_64/usr/* /usr/ ) 	\
+	) && rm -rf tigervnc*
 
 # ADD package for mimeopen used by spawner-service to detect application from a mimetype
 # xclip is used by spwaner
@@ -147,7 +148,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends	\
     && rm -rf /var/lib/apt/lists/*
 
 # this package nodejs include npm 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - \ 
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \ 
 	&& apt-get update && 				\
 	apt-get install -y --no-install-recommends	\
         	nodejs					\
