@@ -139,6 +139,12 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 # krb5 is set in etc no need to copy 
 # ADD krb5.conf  /etc
 
+# add vim 
+RUN apt-get update && apt-get install -y --no-install-recommends	\
+		vim			\
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 # apt install iproute2 install ip command
 # iputils-ping and vin can be removed
 RUN apt-get update && apt-get install -y --no-install-recommends	\
