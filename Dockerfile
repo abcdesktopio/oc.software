@@ -95,8 +95,7 @@ RUN	( 	apt-get install -y tigervnc-standalone-server=1.11.0+dfsg-2 || 						\
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		nautilus			\
         	python?-nautilus 		\
-		python-shellescape		\
-		python3-shellescape		\
+		python?-shellescape		\
         	libfile-mimeinfo-perl		\
         	xclip  				\
 		desktop-file-utils		\
