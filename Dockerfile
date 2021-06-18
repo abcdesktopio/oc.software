@@ -106,15 +106,14 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 
 
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
-		nautilus			\
-		$(echo ' ')			\
-        	$(apt-cache search python-nautilus      | awk '{print $1 }')		\
-		$(echo ' ')								\
-		$(apt-cache search python3-nautilus     | awk '{print $1 }')		\
-		$(echo ' ')								\
-		$(apt-cache search python-shellescape   | awk '{print $1 }')		\
-		$(echo ' ')								\
-		$(apt-cache search python3-shellescape  | awk '{print $1 }')		\
+	nautilus     \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update &&  apt-get install -y --no-install-recommends  \
+		python-nautilus     \
+		python-shellescape  \
+		python3-shellescape \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
