@@ -93,9 +93,6 @@ RUN	( 	apt-get install -y tigervnc-standalone-server=1.11.0+dfsg-2 || 						\
 # read https://gist.github.com/MatteoRagni/d339305d8dac0dbd6c51b4e085b8e526
 
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
-		nautilus			\
-        	python?-nautilus 		\
-		python?-shellescape		\
         	libfile-mimeinfo-perl		\
         	xclip  				\
 		desktop-file-utils		\
@@ -107,6 +104,13 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+
+RUN apt-get update &&  apt-get install -y --no-install-recommends  \
+		nautilus			\
+        	python-nautilus 		\
+		python-shellescape		\
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 ## add curses games
 # RUN apt-get update &&  apt-get install  -y --no-install-recommends  \
