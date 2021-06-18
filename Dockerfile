@@ -87,12 +87,16 @@ RUN	( 	apt-get install -y tigervnc-standalone-server=1.11.0+dfsg-2 || 						\
 # xclip is used by spwaner
 # kterminal is used for built-in terminal
 # desktop-file-utils desktop-file-utils contains a few command line utilities for working with desktop entries
-# python?-nautilus match python-nautilus and python3-nautilus 
-# 
+# python?-nautilus matchs python-nautilus and python3-nautilus
+# python?-nautilus   is used by .local/share/nautilus-python/extensions/desktop_download.py
+# python-shellescape is used by .local/share/nautilus-python/extensions/desktop_download.py
+# read https://gist.github.com/MatteoRagni/d339305d8dac0dbd6c51b4e085b8e526
+
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		nautilus			\
         	python?-nautilus 		\
-		python3-shellescape		\	
+		python-shellescape		\
+		python3-shellescape		\
         	libfile-mimeinfo-perl		\
         	xclip  				\
 		desktop-file-utils		\
