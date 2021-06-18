@@ -111,11 +111,20 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
-		python-nautilus     \
+		python-nautilus    \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+    
+RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		python-shellescape  \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+    
+RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		python3-shellescape \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
 
 ## add curses games
 # RUN apt-get update &&  apt-get install  -y --no-install-recommends  \
