@@ -60,6 +60,7 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		libgl1-mesa-dri 		\
 		x11-xserver-utils		\  
 		xfonts-scalable  		\      
+		websockify			\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
