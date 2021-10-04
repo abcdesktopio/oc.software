@@ -32,16 +32,17 @@ jobs:
          username: ${{ secrets.DOCKER_USERNAME }}
          password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build and push oc.software.${{ matrix.BASE_IMAGE_RELEASE }}
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          build-args: |
-            BASE_IMAGE_RELEASE=${{ matrix.BASE_IMAGE_RELEASE }}
-            BASE_IMAGE=abcdesktopio/oc.ubuntu.${{ matrix.BASE_IMAGE_RELEASE }}:dev
-          tags: |
-            abcdesktopio/oc.software.${{ matrix.BASE_IMAGE_RELEASE }}:dev
+      - name: Run Buildx oc.software.${{ matrix.BASE_IMAGE_RELEASE }}
+        run: |
+          docker buildx build \
+            --build-arg BASE_IMAGE_RELEASE=${{ matrix.BASE_IMAGE_RELEASE }} \
+            --build-arg BASE_IMAGE=abcdesktopio/oc.ubuntu.${{ matrix.BASE_IMAGE_RELEASE }} \
+            --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
+            --platform linux/amd64,linux/arm/v7,linux/arm64 \
+            --output "type=image,push=true" \
+            --tag abcdesktopio/oc.software.${{ matrix.BASE_IMAGE_RELEASE }}:dev \
+            --file ./Dockerfile .
+            
   dispatch_oc_user:
     needs: update_image_oc_software
     runs-on: ubuntu-latest
