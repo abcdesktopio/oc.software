@@ -43,7 +43,7 @@ jobs:
             TAG=dev
             BUILDPLATFORM="linux/amd64"
             BASE_IMAGE_RELEASE=${{ matrix.BASE_IMAGE_RELEASE }}
-            BASE_IMAGE=abcdesktopio/oc.ubuntu:${{ matrix.BASE_IMAGE_RELEASE }}
+            BASE_IMAGE=abcdesktopio/oc.ubuntu.${{ matrix.BASE_IMAGE_RELEASE }}
           tags: |
             abcdesktopio/oc.software.${{ matrix.BASE_IMAGE_RELEASE }}:dev
             
@@ -58,7 +58,7 @@ jobs:
             TAG=dev
             BUILDPLATFORM=linux/arm/v7
             BASE_IMAGE_RELEASE=${{ matrix.BASE_IMAGE_RELEASE }}
-            BASE_IMAGE=abcdesktopio/oc.ubuntu:${{ matrix.BASE_IMAGE_RELEASE }}
+            BASE_IMAGE=abcdesktopio/oc.ubuntu.${{ matrix.BASE_IMAGE_RELEASE }}
           tags: |
             abcdesktopio/oc.software.${{ matrix.BASE_IMAGE_RELEASE }}:dev
             
@@ -73,7 +73,7 @@ jobs:
             TAG=dev
             BUILDPLATFORM=linux/arm64
             BASE_IMAGE_RELEASE=${{ matrix.BASE_IMAGE_RELEASE }}
-            BASE_IMAGE=abcdesktopio/oc.ubuntu:${{ matrix.BASE_IMAGE_RELEASE }}
+            BASE_IMAGE=abcdesktopio/oc.ubuntu.${{ matrix.BASE_IMAGE_RELEASE }}
           tags: |
             abcdesktopio/oc.software.${{ matrix.BASE_IMAGE_RELEASE }}:dev
             
