@@ -2,6 +2,8 @@
 ARG BASE_IMAGE_RELEASE=18.04
 # Default base image 
 ARG BASE_IMAGE=abcdesktopio/oc.ubuntu.18.04:dev
+# Default TAG is dev 
+ARG TAG=dev
 
 # use FROM BASE_IMAGE
 # define FROM befire use ENV command
