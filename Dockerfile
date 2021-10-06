@@ -5,7 +5,7 @@ ARG BASE_IMAGE=abcdesktopio/oc.ubuntu.18.04:dev
 
 # use FROM BASE_IMAGE
 # define FROM befire use ENV command
-FROM ${BASE_IMAGE}
+FROM $BASE_IMAGE:$TAG
 
 # define ARG 
 ARG BASE_IMAGE_RELEASE
