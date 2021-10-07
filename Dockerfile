@@ -1,7 +1,7 @@
 # Default release is 18.04
 ARG BASE_IMAGE_RELEASE=18.04
 # Default base image 
-ARG BASE_IMAGE=abcdesktopio/oc.ubuntu.18.04:dev
+ARG BASE_IMAGE=abcdesktopio/oc.ubuntu.18.04
 # Default TAG is dev 
 ARG TAG=dev
 
