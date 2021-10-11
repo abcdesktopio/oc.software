@@ -35,43 +35,14 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 
 # Add all lib for tigervnc
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
-		libx11-6			\
-		xkb-data			\
-		x11-xkb-utils			\
-		xauth				\
-		libfile-readbackwards-perl 	\
-		netbase				\
-		libaudit1			\
-		libbsd0				\
-		libgcrypt20			\
-		libgl1				\
-		libglx-mesa0			\
-		libgnutls30			\
-		libturbojpeg			\
-		libjpeg8			\
-		libpam0g			\
-		libpixman-1-0			\
-		libselinux1			\
-		libstdc++6 			\
-		libsystemd0 			\
-		libunwind8 			\
-		libxau6 			\
-		libxdmcp6 			\
-		libxfont2 			\
-		zlib1g 				\
-		libgl1-mesa-dri 		\
-		x11-xserver-utils		\  
-		xfonts-scalable  		\      
-		websockify			\
+	xkb-data x11-xkb-utils xauth libaudit1 libbsd0 libc6 libgcc1 libgcrypt20 libgl1-mesa-glx libfile-readbackwards-perl libgl1 libgnutls30 libjpeg8 libpam0g libpixman-1-0 libselinux1 libstdc++6 libsystemd0 libxau6 libxdmcp6 libxfont2 zlib1g \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
 
 # source for tiger vnc is 
 # https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.10.1.x86_64.tar.gz
 # RUN cd /tmp &&	\
 #	wget "https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.11.0.x86_64.tar.gz" -O /tmp/tigervnc-1.11.0.x86_64.tar.gz && \
-
 
 
 # if tigervnc-standalone-server=1.11.0+dfsg-2 exists then install the distrib tigervnc-standalone package
@@ -82,9 +53,12 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 
 COPY	tigervnc-1.11.0.x86_64.tar.gz /tmp
 WORKDIR /tmp
-RUN	( 	apt-get install -y tigervnc-standalone-server=1.11.0+dfsg-2 || 						\ 
-		( tar -xvf tigervnc-1.11.0.x86_64.tar.gz && cp -r tigervnc-1.11.0.x86_64/usr/* /usr/ ) 	\
-	) && rm -rf tigervnc*
+RUN	apt-get update && \
+	 	( 	apt-get install -y tigervnc-standalone-server=1.11.0+dfsg-2 || 				\ 
+		( 	tar -xvf tigervnc-1.11.0.x86_64.tar.gz && cp -r tigervnc-1.11.0.x86_64/usr/* /usr/ ) ) 	\
+	&& rm -rf tigervnc* \
+	&& apt-get clean \
+    	&& rm -rf /var/lib/apt/lists/*
 
 # ADD package for mimeopen used by spawner-service to detect application from a mimetype
 # xclip is used by spwaner
@@ -151,16 +125,11 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 # krb5 is set in etc no need to copy 
 # ADD krb5.conf  /etc
 
-# add vim 
-RUN apt-get update && apt-get install -y --no-install-recommends	\
-		vim			\
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
 # apt install iproute2 install ip command
-# iputils-ping and vin can be removed
+# iputils-ping and vim can be removed
 RUN apt-get update && apt-get install -y --no-install-recommends	\
 		iputils-ping			\
+		vim				\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
