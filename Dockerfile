@@ -82,14 +82,17 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
     && rm -rf /var/lib/apt/lists/*
 
 
-RUN apt-get update &&  apt-get install -y --no-install-recommends  \
-	nautilus     \
-    &&  apt-get install -y --no-install-recommends  python-nautilus     || true     \
-    &&  apt-get install -y --no-install-recommends  python3-nautilus    || true     \
-    &&  apt-get install -y --no-install-recommends  python-shellescape  || true     \
-    &&  apt-get install -y --no-install-recommends  python3-shellescape || true     \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# 
+# Nautilus is a dedicated application
+# comment 10/26/2021
+# RUN apt-get update &&  apt-get install -y --no-install-recommends  \
+#	nautilus     \
+#    &&  apt-get install -y --no-install-recommends  python-nautilus     || true     \
+#    &&  apt-get install -y --no-install-recommends  python3-nautilus    || true     \
+#    &&  apt-get install -y --no-install-recommends  python-shellescape  || true     \
+#    &&  apt-get install -y --no-install-recommends  python3-shellescape || true     \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/*
 
 ## add curses games
 # RUN apt-get update &&  apt-get install  -y --no-install-recommends  \
