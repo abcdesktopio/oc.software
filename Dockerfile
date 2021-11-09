@@ -72,6 +72,7 @@ RUN	apt-get update && \
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
         	libfile-mimeinfo-perl		\
         	xclip  				\
+		xauth				\
 		desktop-file-utils		\
 		shared-mime-info		\
 		imagemagick			\
