@@ -5,6 +5,9 @@ ARG BASE_IMAGE=abcdesktopio/oc.ubuntu.18.04
 # Default TAG is dev 
 ARG TAG=dev
 
+
+FROM abcdesktopio/tigervncserver_1.12:$BASE_IMAGE_RELEASE as tigervncserver
+
 # use FROM BASE_IMAGE
 # define FROM befire use ENV command
 FROM $BASE_IMAGE:$TAG
@@ -34,10 +37,10 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 
 
 # Add all lib for tigervnc
-RUN apt-get update &&  apt-get install -y --no-install-recommends  \
-	xkb-data x11-xkb-utils xauth libaudit1 libbsd0 libc6 libgcc1 libgcrypt20 libgl1-mesa-glx libfile-readbackwards-perl libgl1 libgnutls30 libjpeg8 libpam0g libpixman-1-0 libselinux1 libstdc++6 libsystemd0 libxau6 libxdmcp6 libxfont2 zlib1g \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update &&  apt-get install -y --no-install-recommends  \
+# 	xkb-data x11-xkb-utils xauth libaudit1 libbsd0 libc6 libgcc1 libgcrypt20 libgl1-mesa-glx libfile-readbackwards-perl libgl1 libgnutls30 libjpeg8 libpam0g libpixman-1-0 libselinux1 libstdc++6 libsystemd0 libxau6 libxdmcp6 libxfont2 zlib1g \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/*
 
 # source for tiger vnc is 
 # https://bintray.com/tigervnc/stable/download_file?file_path=tigervnc-1.10.1.x86_64.tar.gz
@@ -50,15 +53,22 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 # ubuntu 18.04 does not provide tigervnc version 1.11
 # ubuntu 20.04 does not provide tigervnc version 1.11
 # ubuntu 21.04 does provide tigervnc version 1.11
+# COPY	tigervnc-1.11.0.x86_64.tar.gz /tmp
+# WORKDIR /tmp
+# RUN	apt-get update && \
+#	 	( 	apt-get install -y tigervnc-standalone-server=1.11.0+dfsg-2 || 				\ 
+#		( 	tar -xvf tigervnc-1.11.0.x86_64.tar.gz && cp -r tigervnc-1.11.0.x86_64/usr/* /usr/ ) ) 	\
+#	&& rm -rf tigervnc* \
+#	&& apt-get clean \
+#    	&& rm -rf /var/lib/apt/lists/*
 
-COPY	tigervnc-1.11.0.x86_64.tar.gz /tmp
-WORKDIR /tmp
-RUN	apt-get update && \
-	 	( 	apt-get install -y tigervnc-standalone-server=1.11.0+dfsg-2 || 				\ 
-		( 	tar -xvf tigervnc-1.11.0.x86_64.tar.gz && cp -r tigervnc-1.11.0.x86_64/usr/* /usr/ ) ) 	\
-	&& rm -rf tigervnc* \
-	&& apt-get clean \
-    	&& rm -rf /var/lib/apt/lists/*
+COPY --from=tigervncserver /deb/* /tmp
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y /tmp/tigervncserver*.deb \ 
+    && rm -rf /tmp/tigervnc* \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* 
+
 
 # ADD package for mimeopen used by spawner-service to detect application from a mimetype
 # xclip is used by spwaner
