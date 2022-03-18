@@ -71,6 +71,15 @@ RUN echo TARGETPLATFORM=$TARGETPLATFORM
 #    && rm -rf /var/lib/apt/lists/* 
 
 
+#
+# Download and install tigervnc 1.12.0 
+RUN wget -O /tmp/download.deb "https://sourceforge.net/projects/tigervnc/files/stable/1.12.0/ubuntu-$(lsb_release -r | awk '{print $2}')LTS/$(dpkg --print-architecture)/tigervncserver_1.12.0-1ubuntu1_$(dpkg --print-architecture).deb/download" && \
+    apt-get install --no-install-recommends /tmp/download.deb && \
+    rm /tmp/download.deb && \ 
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* 
+
+
 # ADD package for mimeopen used by spawner-service to detect application from a mimetype
 # xclip is used by spwaner
 # kterminal is used for built-in terminal
