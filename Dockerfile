@@ -73,8 +73,9 @@ RUN echo TARGETPLATFORM=$TARGETPLATFORM
 #
 # Download and install tigervnc 1.12.0 
 RUN curl --output /tmp/download.deb "https://sourceforge.net/projects/tigervnc/files/stable/1.12.0/ubuntu-$(lsb_release -sr)LTS/$(dpkg --print-architecture)/tigervncserver_1.12.0-1ubuntu1_$(dpkg --print-architecture).deb/download"
-RUN  apt-get update && \
-    apt-get install --no-install-recommends /tmp/download.deb && \
+RUN apt-get update && \
+    cd /tmp &&
+    apt-get install --no-install-recommends ./download.deb && \
     rm /tmp/download.deb && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* 
