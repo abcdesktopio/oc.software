@@ -6,6 +6,10 @@ ARG BASE_IMAGE=abcdesktopio/oc.ubuntu.18.04
 ARG TAG=dev
 
 
+
+
+RUN echo BUILDARCH=$BUILDARCH BUILDVARIANT=$BUILDVARIANT
+
 FROM abcdesktopio/tigervncserver_1.12:$BASE_IMAGE_RELEASE as tigervncserver
 
 # use FROM BASE_IMAGE
@@ -15,8 +19,6 @@ FROM $BASE_IMAGE:$TAG
 # define ARG 
 ARG BASE_IMAGE_RELEASE
 ARG BASE_IMAGE
-
-RUN echo BUILDARCH=$BUILDARCH BUILDVARIANT=$BUILDVARIANT
 
 # 
 # gpg-agent used to verify external deb source
@@ -63,6 +65,7 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 #	&& rm -rf tigervnc* \
 #	&& apt-get clean \
 #    	&& rm -rf /var/lib/apt/lists/*
+
 
 COPY --from=tigervncserver /deb/* /tmp
 RUN apt-get update \
