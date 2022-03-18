@@ -74,9 +74,7 @@ RUN lsbrelease=$(lsb_release -r | awk '{print $2}') && \
     echo "https://sourceforge.net/projects/tigervnc/files/stable/1.12.0/ubuntu-$lsbreleaseLTS/$(dpkg --print-architecture)/tigervncserver_1.12.0-1ubuntu1_$(dpkg --print-architecture).deb/download"
 #
 # Download and install tigervnc 1.12.0 
-RUN lsbrelease=$(lsb_release -r | awk '{print $2}') \
-    urldownload="https://sourceforge.net/projects/tigervnc/files/stable/1.12.0/ubuntu-$lsbreleaseLTS/$(dpkg --print-architecture)/tigervncserver_1.12.0-1ubuntu1_$(dpkg --print-architecture).deb/download" && \
-    wget -O /tmp/download.deb "$urldownload" && \    
+RUN lsbrelease=$(lsb_release -r | awk '{print $2}') architecture=$(dpkg --print-architecture) wget -O /tmp/download.deb "https://sourceforge.net/projects/tigervnc/files/stable/1.12.0/ubuntu-$lsbreleaseLTS/$architecture/tigervncserver_1.12.0-1ubuntu1_$architecture.deb/download" && \    
     apt-get install --no-install-recommends /tmp/download.deb && \
     rm /tmp/download.deb && \ 
     apt-get clean && \
