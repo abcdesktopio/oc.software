@@ -6,12 +6,6 @@ ARG BASE_IMAGE=abcdesktopio/oc.ubuntu.18.04
 ARG TAG=dev
 
 
-
-
-RUN echo BUILDARCH=$BUILDARCH BUILDVARIANT=$BUILDVARIANT
-
-FROM abcdesktopio/tigervncserver_1.12:$BASE_IMAGE_RELEASE as tigervncserver
-
 # use FROM BASE_IMAGE
 # define FROM befire use ENV command
 FROM $BASE_IMAGE:$TAG
@@ -65,6 +59,8 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 #	&& rm -rf tigervnc* \
 #	&& apt-get clean \
 #    	&& rm -rf /var/lib/apt/lists/*
+
+RUN echo BUILDARCH=$BUILDARCH BUILDVARIANT=$BUILDVARIANT
 
 
 COPY --from=tigervncserver /deb/* /tmp
