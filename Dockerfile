@@ -60,7 +60,7 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 #	&& apt-get clean \
 #    	&& rm -rf /var/lib/apt/lists/*
 
-RUN echo BUILDARCH=$BUILDARCH BUILDVARIANT=$BUILDVARIANT
+RUN echo TARGETPLATFORM=$TARGETPLATFORM
 
 
 #COPY --from=tigervncserver /deb/* /tmp
