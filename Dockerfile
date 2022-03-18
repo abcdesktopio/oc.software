@@ -70,11 +70,13 @@ RUN echo TARGETPLATFORM=$TARGETPLATFORM
 #    && apt-get clean \
 #    && rm -rf /var/lib/apt/lists/* 
 
-
+RUN lsbrelease=$(lsb_release -r | awk '{print $2}') && \
+    echo "https://sourceforge.net/projects/tigervnc/files/stable/1.12.0/ubuntu-$lsbreleaseLTS/$(dpkg --print-architecture)/tigervncserver_1.12.0-1ubuntu1_$(dpkg --print-architecture).deb/download"
 #
 # Download and install tigervnc 1.12.0 
-RUN lsbrelease=$(lsb_release -r | awk '{print $2}') && \
-    wget -O /tmp/download.deb "https://sourceforge.net/projects/tigervnc/files/stable/1.12.0/ubuntu-$lsbreleaseLTS/$(dpkg --print-architecture)/tigervncserver_1.12.0-1ubuntu1_$(dpkg --print-architecture).deb/download" && \    
+RUN lsbrelease=$(lsb_release -r | awk '{print $2}') \
+    urldownload="https://sourceforge.net/projects/tigervnc/files/stable/1.12.0/ubuntu-$lsbreleaseLTS/$(dpkg --print-architecture)/tigervncserver_1.12.0-1ubuntu1_$(dpkg --print-architecture).deb/download" &&
+    wget -O /tmp/download.deb "$urldownload" && \    
     apt-get install --no-install-recommends /tmp/download.deb && \
     rm /tmp/download.deb && \ 
     apt-get clean && \
