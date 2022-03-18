@@ -63,12 +63,12 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 RUN echo BUILDARCH=$BUILDARCH BUILDVARIANT=$BUILDVARIANT
 
 
-COPY --from=tigervncserver /deb/* /tmp
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y /tmp/tigervncserver*.deb \ 
-    && rm -rf /tmp/tigervnc* \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* 
+#COPY --from=tigervncserver /deb/* /tmp
+#RUN apt-get update \
+#    && apt-get install --no-install-recommends -y /tmp/tigervncserver*.deb \ 
+#    && rm -rf /tmp/tigervnc* \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/* 
 
 
 # ADD package for mimeopen used by spawner-service to detect application from a mimetype
