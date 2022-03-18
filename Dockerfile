@@ -16,6 +16,8 @@ FROM $BASE_IMAGE:$TAG
 ARG BASE_IMAGE_RELEASE
 ARG BASE_IMAGE
 
+RUN echo BUILDARCH=$BUILDARCH BUILDVARIANT=$BUILDVARIANT
+
 # 
 # gpg-agent used to verify external deb source
 # gnupg for external trust
