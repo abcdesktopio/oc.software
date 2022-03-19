@@ -6,8 +6,6 @@ ARG BASE_IMAGE=abcdesktopio/oc.ubuntu.18.04
 ARG TAG=dev
 
 
-FROM abcdesktopio/tigervncserver_1.12:$BASE_IMAGE_RELEASE as tigervncserver
-
 # use FROM BASE_IMAGE
 # define FROM befire use ENV command
 FROM $BASE_IMAGE:$TAG
@@ -62,12 +60,25 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 #	&& apt-get clean \
 #    	&& rm -rf /var/lib/apt/lists/*
 
-COPY --from=tigervncserver /deb/* /tmp
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y /tmp/tigervncserver*.deb \ 
-    && rm -rf /tmp/tigervnc* \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* 
+RUN echo TARGETPLATFORM=$TARGETPLATFORM
+
+
+#COPY --from=tigervncserver /deb/* /tmp
+#RUN apt-get update \
+#    && apt-get install --no-install-recommends -y /tmp/tigervncserver*.deb \ 
+#    && rm -rf /tmp/tigervnc* \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/* 
+
+#
+# Download and install tigervnc 1.12.0 
+RUN curl --output /tmp/download.deb "https://sourceforge.net/projects/tigervnc/files/stable/1.12.0/ubuntu-$(lsb_release -sr)LTS/$(dpkg --print-architecture)/tigervncserver_1.12.0-1ubuntu1_$(dpkg --print-architecture).deb/download"
+RUN apt-get update && \
+    cd /tmp && \
+    dpkg -i download.deb && \
+    rm /tmp/download.deb && \ 
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* 
 
 
 # ADD package for mimeopen used by spawner-service to detect application from a mimetype
