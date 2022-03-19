@@ -75,7 +75,8 @@ RUN echo TARGETPLATFORM=$TARGETPLATFORM
 RUN echo "url=https://raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb"
 RUN tigerdeburl="https://raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb" && echo $tigerdeburl && curl --output /tmp/download.deb "$tigerdeburl"
 RUN apt-get update && \
-    dpkg -i /tmp/download.deb && \
+    cd /tmp && \
+    apt-get install --no-install-recommends -y ./download.deb && \
     rm /tmp/download.deb && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* 
