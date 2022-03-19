@@ -73,7 +73,7 @@ RUN echo TARGETPLATFORM=$TARGETPLATFORM
 #
 # Download and install tigervnc 1.12.0 
 RUN echo "url=https://github.com/abcdesktopio/oc.software/raw/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb"
-RUN curl --output /tmp/download.deb "https://github.com/abcdesktopio/oc.software/raw/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb"
+RUN tigerdeburl="https://github.com/abcdesktopio/oc.software/raw/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb" && echo $tigerdeburl && curl --output /tmp/download.deb "$tigerdeburl"
 RUN apt-get update && \
     dpkg -i /tmp/download.deb && \
     rm /tmp/download.deb && \ 
