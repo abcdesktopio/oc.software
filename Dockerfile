@@ -30,6 +30,8 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 RUN apt-get update &&  apt-get install -y --no-install-recommends  \
    		tk		\
 		libvncserver1 	\
+		libglu1-mesa	\
+		x11-xkb-utils	\
     && apt-get clean	\
     && rm -rf /var/lib/apt/lists/*
 
@@ -60,9 +62,6 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 #	&& apt-get clean \
 #    	&& rm -rf /var/lib/apt/lists/*
 
-RUN echo TARGETPLATFORM=$TARGETPLATFORM
-
-
 #COPY --from=tigervncserver /deb/* /tmp
 #RUN apt-get update \
 #    && apt-get install --no-install-recommends -y /tmp/tigervncserver*.deb \ 
@@ -72,11 +71,11 @@ RUN echo TARGETPLATFORM=$TARGETPLATFORM
 
 #
 # Download and install tigervnc 1.12.0 
-RUN echo "url=https://raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb"
-RUN tigerdeburl="https://raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb" && echo $tigerdeburl && curl --output /tmp/download.deb "$tigerdeburl"
-RUN apt-get update && \
-    cd /tmp && \
-    apt-get install --no-install-recommends -y ./download.deb && \
+RUN tigerdeburl="https://raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb" && \ 
+    echo $tigerdeburl && \
+    curl --output /tmp/download.deb "$tigerdeburl" && \
+    apt-get update && \
+    cd /tmp && apt-get install --no-install-recommends -y ./download.deb && \
     rm /tmp/download.deb && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* 
