@@ -100,6 +100,7 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		eterm				\
         	qterminal			\
 		xdg-user-dirs			\
+		zenity				\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
