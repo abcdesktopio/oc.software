@@ -81,9 +81,9 @@ RUN apt-get update
 RUN apt-cache search tigervnc-standalone-server
 RUN apt-cache show   tigervnc-standalone-server
 RUN apt-get update && \
-    (   (apt-get install -y tigervnc-standalone-server=1.12.0) || \ 
-        ( tigerdeburl="https://raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb" && \ 
-    	  echo $tigerdeburl && \
+    (   ( apt-get install -y tigervnc-standalone-server=1.12.0+dfsg-4 ) || \ 
+        ( tigerdeburl="https://raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb" && \
+	  echo $tigerdeburl && \
     	  curl --output /tmp/download.deb "$tigerdeburl" && \
     	  apt-get update && \
     	  cd /tmp && apt-get install --no-install-recommends -y ./download.deb && \
