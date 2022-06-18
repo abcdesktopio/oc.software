@@ -70,13 +70,21 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 #    && rm -rf /var/lib/apt/lists/* 
 
 #
-# Download and install tigervnc 1.12.0 
-RUN tigerdeburl="https://raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb" && \ 
-    echo $tigerdeburl && \
-    curl --output /tmp/download.deb "$tigerdeburl" && \
-    apt-get update && \
-    cd /tmp && apt-get install --no-install-recommends -y ./download.deb && \
-    rm /tmp/download.deb && \ 
+# always install tigervnc 1.12.0 
+# try to install tigervnc-standalone-server=1.12.0 from ubuntu distribution 
+# tigervnc exists in 22.04 
+# https://ubuntu.pkgs.org/22.04/ubuntu-universe-amd64/tigervnc-standalone-server_1.12.0+dfsg-4_amd64.deb.html
+# OR
+# download and install tigervnc-standalone-server=1.12.0 from raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0
+# 
+RUN apt-get update && \
+    (   (apt-get install -y tigervnc-standalone-server=1.12.0) || \ 
+        ( tigerdeburl="https://raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb" && \ 
+    	  echo $tigerdeburl && \
+    	  curl --output /tmp/download.deb "$tigerdeburl" && \
+    	  apt-get update && \
+    	  cd /tmp && apt-get install --no-install-recommends -y ./download.deb && \
+    	  rm /tmp/download.deb ) ) && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* 
 
