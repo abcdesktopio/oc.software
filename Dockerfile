@@ -27,13 +27,13 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 
 # Use VNC 0.9.14 update
 # depend for x11vnc
-RUN apt-get update &&  apt-get install -y --no-install-recommends  \
-   		tk		\
-		libvncserver1 	\
-		libglu1-mesa	\
-		x11-xkb-utils	\
-    && apt-get clean	\
-    && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update &&  apt-get install -y --no-install-recommends  \
+#   		tk		\
+#		libvncserver1 	\
+#		libglu1-mesa	\
+#		x11-xkb-utils	\
+#    && apt-get clean	\
+#    && rm -rf /var/lib/apt/lists/*
 
 
 # Add all lib for tigervnc
@@ -70,18 +70,21 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 #    && rm -rf /var/lib/apt/lists/* 
 
 #
-# always install tigervnc 1.12.0 
+# always install tigervnc >= 1.12.0 
+#
 # try to install tigervnc-standalone-server=1.12.0 from ubuntu distribution 
 # tigervnc exists in 22.04 
 # https://ubuntu.pkgs.org/22.04/ubuntu-universe-amd64/tigervnc-standalone-server_1.12.0+dfsg-4_amd64.deb.html
 # OR
 # download and install tigervnc-standalone-server=1.12.0 from raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0
 # 
-RUN apt-get update 
-RUN apt-cache search tigervnc-standalone-server
-RUN apt-cache show   tigervnc-standalone-server
+# RUN apt-get update 
+# RUN apt-cache search tigervnc-standalone-server
+# RUN apt-cache show   tigervnc-standalone-server
+#
+
 RUN apt-get update && \
-    (   ( apt-get install -y tigervnc-standalone-server=1.12.0+dfsg-4 ) || \ 
+    (   ( apt-get install --no-install-recommends -y tigervnc-standalone-server=1.12.0+dfsg-4 ) || \ 
         ( tigerdeburl="https://raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb" && \
 	  echo $tigerdeburl && \
     	  curl --output /tmp/download.deb "$tigerdeburl" && \
@@ -115,27 +118,6 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-
-# 
-# Nautilus is a dedicated application
-# comment 10/26/2021
-# RUN apt-get update &&  apt-get install -y --no-install-recommends  \
-#	nautilus     \
-#    &&  apt-get install -y --no-install-recommends  python-nautilus     || true     \
-#    &&  apt-get install -y --no-install-recommends  python3-nautilus    || true     \
-#    &&  apt-get install -y --no-install-recommends  python-shellescape  || true     \
-#    &&  apt-get install -y --no-install-recommends  python3-shellescape || true     \
-#    && apt-get clean \
-#    && rm -rf /var/lib/apt/lists/*
-
-## add curses games
-# RUN apt-get update &&  apt-get install  -y --no-install-recommends  \
-#		ninvaders			\
-#		bastet				\
-#		libncurses5-dev			\
-#		groff				\
-#    && apt-get clean
-
 ## section 
 # libnss-ldap
 ## section 
@@ -164,22 +146,23 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 
 # apt install iproute2 install ip command
 # iputils-ping and vim can be removed
-RUN apt-get update && apt-get install -y --no-install-recommends	\
-		iputils-ping			\
-		vim				\
-    && apt-get clean \
+RUN apt-get update && apt-get install -y --no-install-recommends\
+		iputils-ping\
+		vim\
+    && apt-get clean\
     && rm -rf /var/lib/apt/lists/*
 
 # this package nodejs include npm 
 # RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \ 
-RUN apt-get update && 				\
-    apt-get install -y --no-install-recommends	\
-        	nodejs					\
-    && apt-get clean \
+# try to install curl -sL https://deb.nodesource.com/setup_18.x | bash -
+# OR run apt-get install -y --no-install-recommends) nodejs
+RUN apt-get update\
+    && ( (curl -sL https://deb.nodesource.com/setup_18.x | bash -) || (apt-get install -y --no-install-recommends nodejs ) )\
+    && apt-get clean\
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        dbus					\
-        dbus-x11				\
-    && apt-get clean \
+        dbus\
+        dbus-x11\
+    && apt-get clean\
     && rm -rf /var/lib/apt/lists/*
