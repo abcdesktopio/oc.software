@@ -149,8 +149,7 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends\
 		iputils-ping\
 		vim\
-		telnet\
-		nslookup\
+		telnet
     && apt-get clean\
     && rm -rf /var/lib/apt/lists/*
 
