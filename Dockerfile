@@ -77,6 +77,9 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 # OR
 # download and install tigervnc-standalone-server=1.12.0 from raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0
 # 
+RUN apt-get update 
+RUN apt-cache search tigervnc-standalone-server
+RUN apt-cache show   tigervnc-standalone-server
 RUN apt-get update && \
     (   (apt-get install -y tigervnc-standalone-server=1.12.0) || \ 
         ( tigerdeburl="https://raw.githubusercontent.com/abcdesktopio/oc.software/main/tigervncserver_1.12.0_ubuntu-$(lsb_release -sr)_$(dpkg --print-architecture).deb" && \ 
