@@ -150,7 +150,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
 		iputils-ping\
 		vim\
 		telnet\
-		nc\
 		nslookup\
     && apt-get clean\
     && rm -rf /var/lib/apt/lists/*
