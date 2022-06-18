@@ -171,9 +171,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends	\
     && rm -rf /var/lib/apt/lists/*
 
 # this package nodejs include npm 
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \ 
-	&& apt-get update && 				\
-	apt-get install -y --no-install-recommends	\
+# RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \ 
+RUN apt-get update && 				\
+    apt-get install -y --no-install-recommends	\
         	nodejs					\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
