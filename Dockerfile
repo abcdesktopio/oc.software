@@ -161,7 +161,8 @@ RUN apt-get update\
     && apt-get install -y --no-install-recommends nodejs \
     && apt-get clean\
     && rm -rf /var/lib/apt/lists/*\
-    && nodejs --version
+    && which nodejs || true
+    && /usr/bin/nodejs --version || true
 
 RUN apt-get update && apt-get install -y --no-install-recommends\
         dbus\
