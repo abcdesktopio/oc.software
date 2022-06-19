@@ -166,12 +166,17 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
     && which nodejs || true \
     && /usr/bin/nodejs --version || true
     
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null \ 
-    && echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list \
-    && apt-get update \
-    && apt-get install -y yarn \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    
+# install yarn
+# RUN echo "DEBIAN=$(cat /etc/debian_version |  awk -F / '{ print $2 }')"
+# RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null \ 
+#    && echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list \
+#    && apt-get update \
+#    && apt-get install -y yarn \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/*
+# It is recommended to install Yarn through the npm package manager, which comes bundled with Node.js when you install it on your system.
+RUN npm install --global yarn
 
 RUN apt-get update && apt-get install -y --no-install-recommends\
         dbus\
