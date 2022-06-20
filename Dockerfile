@@ -162,7 +162,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
 # RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \ 
 # try to install curl -sL https://deb.nodesource.com/setup_18.x | bash -
 # OR run apt-get install -y --no-install-recommends) nodejs
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
+COPY setup_16.x  setup_18.x  /tmp
+RUN bash /tmp/setup_16.x \
     && apt-get install -y nodejs \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
