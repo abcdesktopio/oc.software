@@ -161,16 +161,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
 # this package nodejs include npm 
 # RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \ 
 # try to install curl -sL https://deb.nodesource.com/setup_18.x | bash -
-# OR run apt-get install -y --no-install-recommends) nodejs
+# OR run apt-get install -y --no-install-recommends nodejs
+# -> setup_16.x setup_18.x is a fixed version whitout pre release test
+# -> hack for a github cache failure detected 06/20/2022 
 COPY setup_16.x  setup_18.x  /tmp
 RUN bash /tmp/setup_16.x \
     && apt-get install -y nodejs \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && uname -a \
-    && which nodejs || true \
-    && /usr/bin/nodejs --version || true
-    
+    && node --version
     
 # install yarn
 # RUN echo "DEBIAN=$(cat /etc/debian_version |  awk -F / '{ print $2 }')"
@@ -181,7 +180,7 @@ RUN bash /tmp/setup_16.x \
 #    && apt-get clean \
 #    && rm -rf /var/lib/apt/lists/*
 # It is recommended to install Yarn through the npm package manager, which comes bundled with Node.js when you install it on your system.
-RUN npm install --global yarn
+RUN npm install --location=global yarn
 
 RUN apt-get update && apt-get install -y --no-install-recommends\
         dbus\
