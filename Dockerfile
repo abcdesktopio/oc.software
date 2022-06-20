@@ -153,6 +153,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
     && apt-get clean\
     && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install -y --no-install-recommends\
+       lsb-release\
+    && apt-get clean\
+    && rm -rf /var/lib/apt/lists/*
+
 # this package nodejs include npm 
 # RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \ 
 # try to install curl -sL https://deb.nodesource.com/setup_18.x | bash -
