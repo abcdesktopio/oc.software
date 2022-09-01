@@ -111,8 +111,6 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		desktop-file-utils		\
 		shared-mime-info		\
 		imagemagick			\
-		eterm				\
-        	qterminal			\
 		xdg-user-dirs			\
 		zenity				\
     && apt-get clean \
@@ -143,15 +141,6 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends \
 
 # krb5 is set in etc no need to copy 
 # ADD krb5.conf  /etc
-
-# apt install iproute2 install ip command
-# iputils-ping and vim can be removed
-RUN apt-get update && apt-get install -y --no-install-recommends\
-		iputils-ping\
-		vim\
-		telnet\
-    && apt-get clean\
-    && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install -y --no-install-recommends\
        lsb-release\
