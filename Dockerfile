@@ -113,6 +113,7 @@ RUN apt-get update &&  apt-get install -y --no-install-recommends  \
 		shared-mime-info		\
 		imagemagick			\
 		xdg-user-dirs			\
+		gsetroot			\
 		zenity				\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
